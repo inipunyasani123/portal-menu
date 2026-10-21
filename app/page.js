@@ -45,7 +45,8 @@ function Logo({ kecil = false }) {
         <svg viewBox="0 0 24 24" className={kecil ? 'h-4 w-4' : 'h-5 w-5'} fill="currentColor"><path d="M3 3h7v7H3V3Zm2 2v3h3V5H5Zm9-2h7v7h-7V3Zm2 2v3h3V5h-3ZM3 14h7v7H3v-7Zm2 2v3h3v-3H5Zm9-2h3v3h-3v-3Zm4 4h3v3h-3v-3Zm-4 0h2v2h-2v-2Zm6-4h1v2h-1v-2Z" /></svg>
       </span>
       <span className="flex flex-col text-left leading-none">
-        <span className="font-display text-[0.95rem] font-700 tracking-tight">PintuWeb</span>
+        {/* Spasi di antara dua baris: teks terlihat terbaca "PintuWeb Menu Digital" (sama dengan awal aria-label tautan) */}
+        <span className="font-display text-[0.95rem] font-700 tracking-tight">PintuWeb</span>{' '}
         <span className={`mt-1 text-[10px] font-semibold uppercase tracking-[0.14em] ${kecil ? 'text-stiker' : 'text-pindai-tua'}`}>Menu Digital</span>
       </span>
     </>

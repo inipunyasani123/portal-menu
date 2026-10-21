@@ -37,8 +37,9 @@
   .wadah { width: 100%; max-width: 72rem; margin-inline: auto; padding-inline: 1rem; }
   @media (min-width: 640px) { .wadah { padding-inline: 1.5rem; } }
 
-  .lewati { position: fixed; left: 1rem; top: 0.75rem; z-index: 60; transform: translateY(-160%); border-radius: 999px; background: var(--color-tinta); color: var(--color-kertas); padding: 0.5rem 1rem; font-weight: 600; font-size: 0.875rem; }
-  .lewati:focus { transform: none; }
+  /* Tautan lompat: digeser jauh di atas layar (tepinya tidak mengintip) sampai difokus papan ketik */
+  .lewati { position: fixed; left: 1rem; top: 0.75rem; z-index: 60; transform: translateY(calc(-100% - 2rem)); border-radius: 999px; background: var(--color-tinta); color: var(--color-kertas); padding: 0.5rem 1rem; font-weight: 600; font-size: 0.875rem; }
+  .lewati:focus { transform: none; box-shadow: 0 6px 18px -6px rgb(21 22 26 / 0.45); }
 
   .label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-tinta-3); }
 
