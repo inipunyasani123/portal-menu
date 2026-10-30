@@ -12,28 +12,28 @@ const N = templates.length;
 const NAMA_N = { 4: 'Empat', 5: 'Lima', 6: 'Enam' }[N] ?? N;
 
 const BISA = [
-  ['Nomor meja ikut terbaca', 'Setiap meja punya QR dengan nomornya sendiri. Pelanggan tidak perlu mengetik apa pun; kasir tahu pesanan datang dari meja mana.'],
-  ['Cari dan saring', 'Ketik "pedas", "tanpa kafein", atau "dingin". Bagian yang kosong hilang sendiri, jadi daftarnya tidak pernah terasa panjang.'],
-  ['Opsi dan topping dengan harga', 'Ukuran, suhu, level pedas, susu oat, topping tambahan. Harga tambahannya dihitung di lembar pilihan sebelum masuk nampan.'],
-  ['Nampan ke WhatsApp', 'Pesanan tersusun rapi sebagai pesan: item, pilihan, catatan, nomor meja, total. Masuk ke WhatsApp kasir tanpa aplikasi tambahan.'],
-  ['Jam buka dihitung sendiri', 'Status buka atau tutup mengikuti jam usahamu dalam WIB, termasuk warung yang tutup lewat tengah malam.'],
-  ['Habis tinggal ditandai', 'Stok habis, harga naik, menu baru: cukup ubah satu berkas data. Tidak ada cetak ulang, tidak ada stiker koreksi.'],
+  ['Nomor meja otomatis', 'Tiap meja punya kode QR sendiri. Kasir tahu pesanan dari meja mana.'],
+  ['Cari menu', 'Ketik "pedas" atau "dingin", daftar langsung menyesuaikan.'],
+  ['Pilihan dan tambahan', 'Ukuran, suhu, level pedas, dan topping. Harganya dihitung sendiri.'],
+  ['Pesanan ke WhatsApp', 'Pesanan tersusun rapi dan masuk ke WhatsApp kasir.'],
+  ['Jam buka otomatis', 'Status buka atau tutup mengikuti jam usahamu.'],
+  ['Menu habis, tinggal ubah', 'Harga naik atau stok habis? Cukup diubah, tanpa cetak ulang.'],
 ];
 
 const PASANG = [
-  ['Kirim daftar menu', 'Foto menu lama, Excel, atau catatan WhatsApp. Harga, deskripsi singkat, dan opsi yang biasa ditanya pelanggan.'],
-  ['Kami susun dan desain', 'Kategori, urutan, ilustrasi, dan identitas warna yang cocok dengan warungmu. Satu halaman, ringan di ponsel murah sekalipun.'],
-  ['Cetak QR per meja', 'Kamu terima berkas QR siap cetak untuk tiap nomor meja, plus satu QR umum untuk kasir dan media sosial.'],
-  ['Pesanan masuk WhatsApp', 'Tamu pindai, pilih, kirim. Nomor WhatsApp kasir dipasang di halaman; pesan masuk lengkap dengan nomor meja.'],
+  ['Kirim daftar menu', 'Foto menu lama atau catatan WhatsApp sudah cukup.'],
+  ['Kami buatkan', 'Menu disusun rapi dan warnanya disesuaikan dengan warungmu.'],
+  ['Cetak kode QR', 'Kamu terima kode QR siap cetak untuk tiap meja.'],
+  ['Pesanan masuk', 'Tamu pindai, pilih, dan kirim. Pesanan masuk ke WhatsApp kasir.'],
 ];
 
 const TANYA = [
-  { q: 'Berapa biaya membuat menu digital seperti ini?', a: `Menu digital satu halaman masuk paket ${PAKET.nama} PintuWeb: ${PAKET.mulai}–${PAKET.sampai}, dikerjakan ${PAKET.waktu}. Termasuk desain, berkas QR siap cetak per meja, domain, dan tombol WhatsApp. Angka pastinya tertulis di penawaran sebelum mulai.` },
-  { q: 'Pesanan masuk ke mana?', a: 'Ke nomor WhatsApp kasir yang kamu tentukan, sebagai pesan yang sudah tersusun: item, pilihan, catatan, nomor meja, dan total. Di demo ini WhatsApp terbuka tanpa nomor tujuan.' },
-  { q: 'Bisa ganti harga atau menandai menu habis sendiri?', a: 'Bisa. Semua isi menu ada di satu berkas data yang mudah dibaca. Kirim perubahannya ke kami, atau minta akses untuk mengubahnya sendiri; halaman diperbarui tanpa cetak ulang.' },
-  { q: 'Apakah pelanggan harus memasang aplikasi?', a: 'Tidak. Menu dibuka di peramban ponsel lewat kamera biasa. Halamannya ringan (tanpa foto berat) dan tetap bisa dibaca di sinyal lemah.' },
-  { q: 'Bisa pakai pembayaran QRIS atau kasir?', a: 'Alur dasarnya: pesan dari meja, bayar di kasir atau lewat QRIS saat diantar. Kalau mau pembayaran online di dalam halaman, itu masuk paket Aplikasi Web; ceritakan kebutuhanmu dan kami tunjukkan bedanya.' },
-  { q: 'Usaha saya bukan kafe atau warung makan. Tetap cocok?', a: 'Pola yang sama dipakai untuk daftar layanan salon, harga laundry, paket fotokopi, atau katalog kios. Apa pun yang biasa dicetak dan sering berubah harganya.' },
+  { q: 'Berapa biaya membuat menu digital?', a: `${PAKET.mulai}–${PAKET.sampai}, selesai ${PAKET.waktu}. Sudah termasuk desain, kode QR siap cetak, dan domain.` },
+  { q: 'Pesanan masuk ke mana?', a: 'Ke nomor WhatsApp kasir yang kamu tentukan. Di demo ini, WhatsApp terbuka tanpa nomor tujuan.' },
+  { q: 'Bisa ganti harga atau menandai menu habis?', a: 'Bisa. Kirim perubahannya ke kami, halaman diperbarui tanpa cetak ulang.' },
+  { q: 'Pelanggan harus memasang aplikasi?', a: 'Tidak. Cukup pindai dengan kamera HP. Halamannya ringan dan enak dibuka di sinyal lemah.' },
+  { q: 'Bisa bayar lewat QRIS?', a: 'Bisa. Pelanggan memesan dari meja, lalu membayar di kasir atau lewat QRIS.' },
+  { q: 'Usaha saya bukan kafe. Tetap cocok?', a: 'Cocok. Bisa untuk daftar harga salon, laundry, atau kios.' },
 ];
 
 const faqLd = {
@@ -84,12 +84,12 @@ export default function PortalMenu() {
         <section id="hero" className="modul relative overflow-hidden border-b border-garis">
           <div className="wadah grid gap-10 py-8 sm:py-16 lg:grid-cols-12 lg:items-center lg:py-20">
             <div className="min-w-0 lg:col-span-7">
-              <p className="label naik">{N} demo · pindai dan coba di ponselmu</p>
+              <p className="label naik">{N} demo · pindai dan coba di HP</p>
               <h1 className="mt-3 text-[1.55rem] min-[400px]:text-[1.7rem] sm:mt-4 sm:text-6xl lg:text-[4.2rem]">
-                Menu yang dipindai, bukan dicetak ulang.
+                Menu cukup dipindai, tak perlu dicetak ulang.
               </h1>
               <p className="naik naik-2 mt-6 hidden max-w-xl sm:block text-[1.05rem] leading-relaxed text-tinta-2">
-                Satu halaman ringan di balik stiker QR tiap meja: pelanggan memilih, memberi catatan, lalu pesanannya masuk WhatsApp kasir lengkap dengan nomor meja. Harga naik? Ubah datanya, bukan cetak ulang.
+                Pelanggan pindai kode QR di meja, pilih menu, lalu pesanan masuk ke WhatsApp kasir.
               </p>
               <div className="naik naik-2 mt-5 flex flex-wrap items-center gap-3 sm:mt-8">
                 <a href="#meja" className="tombol tombol-tinta">Lihat {NAMA_N.toLowerCase()} meja</a>
@@ -98,7 +98,7 @@ export default function PortalMenu() {
               <p className="mt-4 hidden text-sm text-tinta-3 sm:block">Mulai <strong className="font-display text-base text-tinta">{PAKET.mulai}</strong> · pengerjaan {PAKET.waktu}</p>
               {/* Strip demo (ponsel): demo terlihat di layar pertama, menaut ke kartunya */}
               <div className="mt-5 md:hidden">
-                <p className="label">Geser, lalu pilih meja</p>
+                <p className="label">Geser, lalu pilih</p>
                 <ul className="strip mt-2" aria-label="Pintasan ke demo">
                   {templates.map((t) => (
                     <li key={t.kode} className="contents">
@@ -130,7 +130,7 @@ export default function PortalMenu() {
                   <span className="garis-pindai" aria-hidden="true" />
                 </div>
                 <p className="mt-5 text-center font-display text-sm font-700">Pindai untuk lihat menu</p>
-                <p className="mt-1 text-center text-xs text-tinta-3">Kode ini sungguhan: membuka halaman ini di ponselmu.</p>
+                <p className="mt-1 text-center text-xs text-tinta-3">Kode ini sungguhan, coba pindai.</p>
               </div>
             </div>
           </div>
@@ -141,8 +141,8 @@ export default function PortalMenu() {
           <div className="wadah">
             <div className="max-w-2xl">
               <p className="label">Galeri</p>
-              <h2 id="judul-meja" className="mt-3 text-3xl sm:text-5xl">{NAMA_N} meja, {NAMA_N.toLowerCase()} warung, satu cara pesan.</h2>
-              <p className="mt-4 text-tinta-2">Tiap demo adalah usaha fiktif dengan identitas, tata letak, dan jenis opsi yang berbeda. Buka dari nomor meja contohnya supaya lencana meja dan pesan WhatsApp ikut terisi.</p>
+              <h2 id="judul-meja" className="mt-3 text-3xl sm:text-5xl">{NAMA_N} menu untuk dicoba</h2>
+              <p className="mt-4 text-tinta-2">Semua usahanya fiktif. Buka dari nomor meja contoh supaya pesanannya ikut terisi.</p>
             </div>
 
             <ol className="mt-10 space-y-10 sm:mt-14 sm:space-y-16">
@@ -162,9 +162,8 @@ export default function PortalMenu() {
                     <div className={`lg:col-span-6 ${balik ? 'lg:order-1 lg:col-start-1' : 'lg:col-start-7'}`}>
                       <p className="label">{t.kode} · {t.name} · {t.kota}</p>
                       <h3 className="mt-2 text-3xl sm:text-4xl">{t.merek}</h3>
-                      <p className="mt-1 font-semibold text-pindai-tua">{t.paradigma}</p>
                       <p className="mt-3 text-[0.98rem] leading-relaxed text-tinta-2">{t.description}</p>
-                      <ul className="mt-5 flex flex-wrap gap-2" aria-label={`Bagian yang bisa dicoba di ${t.merek}`}>
+                      <ul className="mt-5 flex flex-wrap gap-2" aria-label={`Yang bisa dicoba di ${t.merek}`}>
                         {t.halaman.map(([path, label]) => (
                           <li key={path}>
                             <a href={`${t.url}${path}`} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-9 items-center rounded-full border border-garis bg-white px-3.5 text-sm font-medium text-tinta-2 transition hover:border-tinta hover:text-tinta">{label}</a>
@@ -189,9 +188,9 @@ export default function PortalMenu() {
           <div className="wadah">
             <div className="grid gap-8 lg:grid-cols-12">
               <div className="lg:col-span-4">
-                <p className="label !text-stiker">Dari sisi meja</p>
-                <h2 id="judul-bisa" className="mt-3 text-3xl sm:text-4xl">Yang bisa dilakukan pelanggan tanpa memanggil siapa pun</h2>
-                <p className="mt-4 text-sm leading-relaxed text-kertas/70">Semua ini sudah berjalan di keempat demo, bukan daftar rencana. Coba satu per satu dari nomor meja contoh.</p>
+                <p className="label !text-stiker">Untuk pelanggan</p>
+                <h2 id="judul-bisa" className="mt-3 text-3xl sm:text-4xl">Pelanggan bisa pesan sendiri</h2>
+                <p className="mt-4 text-sm leading-relaxed text-kertas/70">Semua sudah bisa dicoba di demo.</p>
               </div>
               <ol className="grid gap-x-10 lg:col-span-8 sm:grid-cols-2">
                 {BISA.map(([j, d], i) => (
@@ -211,13 +210,13 @@ export default function PortalMenu() {
           <div className="wadah grid gap-10 lg:grid-cols-12 lg:items-start">
             <div className="lg:col-span-5">
               <p className="label">Cara pasang</p>
-              <h2 id="judul-pasang" className="mt-3 text-3xl sm:text-4xl">Dari foto menu lama sampai stiker di meja</h2>
-              <p className="mt-4 text-tinta-2">Pengerjaan {PAKET.waktu}. Kamu tidak perlu menyiapkan apa pun selain daftar menu dan nomor WhatsApp kasir.</p>
+              <h2 id="judul-pasang" className="mt-3 text-3xl sm:text-4xl">Dari menu lama ke kode QR</h2>
+              <p className="mt-4 text-tinta-2">Selesai {PAKET.waktu}. Siapkan daftar menu dan nomor WhatsApp kasir.</p>
               <a href={WA} target="_blank" rel="noopener noreferrer" className="tombol tombol-stiker mt-6">Mulai dari WhatsApp</a>
             </div>
             <div className="lg:col-span-6 lg:col-start-7">
               <ol className="struk my-3 px-6 py-7 shadow-[0_20px_50px_-24px_rgba(21,22,26,0.35)] sm:px-8">
-                <li className="mb-4 flex items-center justify-between border-b border-dashed border-garis pb-3 text-xs uppercase tracking-[0.16em] text-tinta-3"><span>Langkah pemasangan</span><span>{PASANG.length} baris</span></li>
+                <li className="mb-4 flex items-center justify-between border-b border-dashed border-garis pb-3 text-xs uppercase tracking-[0.16em] text-tinta-3"><span>Langkah</span><span>{PASANG.length} baris</span></li>
                 {PASANG.map(([j, d], i) => (
                   <li key={j} className="flex gap-4 border-b border-dashed border-garis py-4 last:border-0">
                     <span className="font-display text-xl font-700 text-tinta-3">{i + 1}</span>
@@ -237,7 +236,7 @@ export default function PortalMenu() {
         <section id="tanya" aria-labelledby="judul-tanya" className="scroll-mt-20 border-t border-garis bg-white py-14 sm:py-20">
           <div className="wadah max-w-3xl">
             <p className="label">Tanya jawab</p>
-            <h2 id="judul-tanya" className="mt-3 text-3xl sm:text-4xl">Sebelum menempel stiker</h2>
+            <h2 id="judul-tanya" className="mt-3 text-3xl sm:text-4xl">Pertanyaan umum</h2>
             <div className="mt-8 divide-y divide-garis border-y border-garis">
               {TANYA.map((t, i) => (
                 <details key={t.q} name="faq-menu" open={i === 0} className="tanya group">
@@ -256,8 +255,8 @@ export default function PortalMenu() {
         <section className="modul border-t border-garis px-4 py-16 text-center sm:px-6">
           <div className="mx-auto max-w-xl">
             <span className="stiker" aria-hidden="true">QR</span>
-            <h2 className="mt-5 text-3xl sm:text-4xl">Warungmu berikutnya yang menempel stiker</h2>
-            <p className="mt-4 text-tinta-2">Kirim foto menu lamamu. Dalam {PAKET.waktu} kamu terima halaman menu dan berkas QR siap cetak.</p>
+            <h2 className="mt-5 text-3xl sm:text-4xl">Warungmu bisa punya menu seperti ini</h2>
+            <p className="mt-4 text-tinta-2">Kirim foto menu lamamu. Dalam {PAKET.waktu}, menu dan kode QR siap cetak.</p>
             <a href={WA} target="_blank" rel="noopener noreferrer" className="tombol tombol-tinta mt-7">Chat WhatsApp {WA_DISPLAY}</a>
           </div>
         </section>
@@ -267,7 +266,7 @@ export default function PortalMenu() {
         <div className="wadah grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
           <div className="col-span-2 sm:col-span-1">
             <p className="flex items-center gap-2"><Logo kecil /></p>
-            <p className="mt-3 max-w-xs text-sm leading-relaxed">{NAMA_N} menu digital untuk kedai kopi, warung bakso, warung Jepang, dan dessert bar.</p>
+            <p className="mt-3 max-w-xs text-sm leading-relaxed">{NAMA_N} demo menu digital yang bisa kamu coba.</p>
           </div>
           <nav aria-labelledby="kaki-lanjut" className="text-sm">
             <p id="kaki-lanjut" className="label !text-stiker">Lanjut di PintuWeb</p>

@@ -8,7 +8,7 @@ const geist = Geist({ subsets: ['latin'], variable: '--font-geist', display: 'sw
 
 // Merek di hasil pencarian & pratinjau tautan = PintuWeb. Jumlah demo dihitung dari data, bukan ditulis tangan.
 const TITLE = `Contoh Menu Digital: ${templates.length} Demo Siap Coba | PintuWeb`;
-const DESCRIPTION = 'Empat menu digital QR untuk kedai kopi, warung bakso, warung Jepang, dan dessert bar: pindai di meja, pilih opsi, kirim pesanan ke WhatsApp.';
+const DESCRIPTION = 'Empat contoh menu digital QR: kedai kopi, warung bakso, warung Jepang, dan dessert bar. Pindai di meja, pilih, pesan lewat WhatsApp.';
 
 // CollectionPage + daftar demonya (ItemList) + jejak. Data dari templates-data, jadi ikut bertambah sendiri.
 const jsonLd = {
