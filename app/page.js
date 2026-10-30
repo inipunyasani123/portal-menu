@@ -1,9 +1,13 @@
 import Image from 'next/image';
 import QR from './components/QR';
 import { templates, slugOf } from './components/templates-data';
-import { LANJUT, GALERI_LAIN, PINTUWEB, URL_PORTAL, PAKET, WA_DISPLAY, wa } from './components/pintuweb';
+import GaleriLain from './components/GaleriLain';
+import BilahLengket from './components/BilahLengket';
+import Sorot from './components/Sorot';
+import { LANJUT, BACA, GALERI_LAIN, PINTUWEB, URL_PORTAL, PAKET, WA_DISPLAY, wa } from './components/pintuweb';
 
 const WA = wa('Halo PintuWeb, saya mau buat menu digital QR untuk usaha saya. Boleh minta info?');
+const WA_BILAH = wa('Halo PintuWeb, saya tertarik menu digital QR. Boleh minta info?');
 const N = templates.length;
 const NAMA_N = { 4: 'Empat', 5: 'Lima', 6: 'Enam' }[N] ?? N;
 
@@ -41,8 +45,10 @@ const faqLd = {
 function Logo({ kecil = false }) {
   return (
     <>
-      <span className={`grid shrink-0 place-items-center rounded-lg bg-tinta text-kertas ${kecil ? 'h-8 w-8' : 'h-9 w-9'}`} aria-hidden="true">
-        <svg viewBox="0 0 24 24" className={kecil ? 'h-4 w-4' : 'h-5 w-5'} fill="currentColor"><path d="M3 3h7v7H3V3Zm2 2v3h3V5H5Zm9-2h7v7h-7V3Zm2 2v3h3V5h-3ZM3 14h7v7H3v-7Zm2 2v3h3v-3H5Zm9-2h3v3h-3v-3Zm4 4h3v3h-3v-3Zm-4 0h2v2h-2v-2Zm6-4h1v2h-1v-2Z" /></svg>
+      {/* Logo pintu asli PintuWeb (367×512); di latar gelap diberi alas putih membulat */}
+      <span className={`grid shrink-0 place-items-center ${kecil ? 'rounded-lg bg-white p-1' : ''}`} aria-hidden="true">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/menu-digital/logo-pintuweb.png" alt="" width="367" height="512" className={kecil ? 'h-7 w-auto' : 'h-8 w-auto'} />
       </span>
       <span className="flex flex-col text-left leading-none">
         {/* Spasi di antara dua baris: teks terlihat terbaca "PintuWeb Menu Digital" (sama dengan awal aria-label tautan) */}
@@ -57,14 +63,8 @@ export default function PortalMenu() {
   return (
     <div id="top" className="min-h-screen">
       <a href="#konten" className="lewati">Lewati ke konten</a>
-      {/* Jejak: portal ini bagian dari PintuWeb */}
-      <nav aria-label="Jejak" className="bg-tinta text-xs text-kertas">
-        <ol className="wadah flex items-center gap-2 py-1.5">
-          <li><a href={PINTUWEB} className="font-semibold underline-offset-4 hover:underline">PintuWeb</a></li>
-          <li aria-hidden="true" className="opacity-60">/</li>
-          <li aria-current="page">Menu Digital</li>
-        </ol>
-      </nav>
+      <GaleriLain galeri={GALERI_LAIN} pintuweb={PINTUWEB} />
+      <Sorot />
 
       <header className="sticky top-0 z-40 border-b border-garis bg-kertas/90 backdrop-blur-xl">
         <div className="wadah flex items-center justify-between gap-3 py-2.5">
@@ -75,30 +75,46 @@ export default function PortalMenu() {
             <a href="#pasang" className="transition hover:text-tinta">Cara pasang</a>
             <a href="#tanya" className="transition hover:text-tinta">Tanya jawab</a>
           </nav>
-          <a href={WA} target="_blank" rel="noopener noreferrer" className="tombol tombol-tinta min-h-10 shrink-0 px-4 text-sm">Pesan menu QR</a>
+          <a href={WA} target="_blank" rel="noopener noreferrer" className="tombol tombol-tinta min-h-10 shrink-0 px-4 text-sm">Pesan menu digital</a>
         </div>
       </header>
 
       <main id="konten" tabIndex={-1}>
         {/* Hero: kartu tenda di atas meja */}
-        <section className="modul relative overflow-hidden border-b border-garis">
-          <div className="wadah grid gap-10 py-12 sm:py-16 lg:grid-cols-12 lg:items-center lg:py-20">
-            <div className="lg:col-span-7">
+        <section id="hero" className="modul relative overflow-hidden border-b border-garis">
+          <div className="wadah grid gap-10 py-8 sm:py-16 lg:grid-cols-12 lg:items-center lg:py-20">
+            <div className="min-w-0 lg:col-span-7">
               <p className="label naik">{N} demo · pindai dan coba di ponselmu</p>
-              <h1 className="mt-4 text-[2.4rem] sm:text-6xl lg:text-[4.2rem]">
+              <h1 className="mt-3 text-[1.55rem] min-[400px]:text-[1.7rem] sm:mt-4 sm:text-6xl lg:text-[4.2rem]">
                 Menu yang dipindai, bukan dicetak ulang.
               </h1>
-              <p className="naik naik-2 mt-6 max-w-xl text-[1.05rem] leading-relaxed text-tinta-2">
+              <p className="naik naik-2 mt-6 hidden max-w-xl sm:block text-[1.05rem] leading-relaxed text-tinta-2">
                 Satu halaman ringan di balik stiker QR tiap meja: pelanggan memilih, memberi catatan, lalu pesanannya masuk WhatsApp kasir lengkap dengan nomor meja. Harga naik? Ubah datanya, bukan cetak ulang.
               </p>
-              <div className="naik naik-2 mt-8 flex flex-wrap items-center gap-3">
+              <div className="naik naik-2 mt-5 flex flex-wrap items-center gap-3 sm:mt-8">
                 <a href="#meja" className="tombol tombol-tinta">Lihat {NAMA_N.toLowerCase()} meja</a>
                 <a href="#pasang" className="tombol tombol-garis">Cara pasang</a>
               </div>
-              <p className="mt-5 text-sm text-tinta-3">Mulai <strong className="font-display text-base text-tinta">{PAKET.mulai}</strong> · pengerjaan {PAKET.waktu}</p>
+              <p className="mt-4 hidden text-sm text-tinta-3 sm:block">Mulai <strong className="font-display text-base text-tinta">{PAKET.mulai}</strong> · pengerjaan {PAKET.waktu}</p>
+              {/* Strip demo (ponsel): demo terlihat di layar pertama, menaut ke kartunya */}
+              <div className="mt-5 md:hidden">
+                <p className="label">Geser, lalu pilih meja</p>
+                <ul className="strip mt-2" aria-label="Pintasan ke demo">
+                  {templates.map((t) => (
+                    <li key={t.kode} className="contents">
+                      <a href={`#${slugOf(t)}`} className="block w-[5.75rem]">
+                        <span className="block overflow-hidden rounded-2xl border-2 border-tinta bg-white" style={{ background: t.warnaMuda }}>
+                          <Image src={t.image} alt="" width={390} height={844} sizes="92px" className="aspect-[390/560] w-full object-cover object-top" />
+                        </span>
+                        <span className="mt-1.5 block text-xs font-semibold leading-tight">{t.merek}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
-            <div className="tenda relative mx-auto w-full max-w-sm lg:col-span-5">
+            <div className="tenda relative mx-auto hidden w-full max-w-sm md:block lg:col-span-5">
               {/* sisi lipatan */}
               <div className="tenda-sisi absolute inset-y-6 -left-3 w-10 rounded-l-lg bg-kertas-2" aria-hidden="true" />
               <div className="tenda-muka relative rounded-xl border border-garis bg-white p-6">
@@ -134,7 +150,7 @@ export default function PortalMenu() {
                 const slug = slugOf(t);
                 const balik = i % 2 === 1;
                 return (
-                  <li key={t.kode} id={slug} className="scroll-mt-24 grid items-center gap-8 lg:grid-cols-12">
+                  <li key={t.kode} id={slug} data-demo={slug} className="scroll-mt-24 grid items-center gap-8 lg:grid-cols-12">
                     <div className={`relative mx-auto w-full max-w-[17rem] sm:max-w-[19rem] lg:col-span-5 ${balik ? 'lg:order-2 lg:col-start-8' : ''}`}>
                       <span className="stiker absolute -left-4 -top-4 z-10" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
                       <a href={`${t.url}/?meja=${t.meja}`} target="_blank" rel="noopener noreferrer" className="ponsel block" tabIndex={-1} aria-hidden="true">
@@ -155,9 +171,10 @@ export default function PortalMenu() {
                           </li>
                         ))}
                       </ul>
-                      <div className="mt-6 flex flex-wrap gap-3">
+                      <p className="mt-5 text-sm text-tinta-3">Menu digital seperti ini: <strong className="font-display text-tinta">mulai {PAKET.mulai}</strong> · {PAKET.waktu}</p>
+                      <div className="mt-3 flex flex-wrap gap-3">
                         <a href={`${t.url}/?meja=${t.meja}`} target="_blank" rel="noopener noreferrer" className="tombol tombol-tinta">Coba demo {t.merek}</a>
-                        <a href={wa(`Halo PintuWeb, saya tertarik menu digital seperti ${t.merek}. Boleh minta info?`)} target="_blank" rel="noopener noreferrer" className="tombol tombol-garis">Pesan yang seperti ini</a>
+                        <a href={wa(`Halo PintuWeb, saya tertarik menu digital QR seperti contoh ${t.merek} (${t.url}). Boleh minta info?`)} target="_blank" rel="noopener noreferrer" className="tombol tombol-garis">Pesan yang seperti ini</a>
                       </div>
                     </div>
                   </li>
@@ -246,8 +263,8 @@ export default function PortalMenu() {
         </section>
       </main>
 
-      <footer className="gelap bg-tinta pb-6 pt-10 text-kertas/75">
-        <div className="wadah grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3">
+      <footer id="kaki" className="gelap bg-tinta pb-24 pt-10 text-kertas/75 md:pb-6">
+        <div className="wadah grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
           <div className="col-span-2 sm:col-span-1">
             <p className="flex items-center gap-2"><Logo kecil /></p>
             <p className="mt-3 max-w-xs text-sm leading-relaxed">{NAMA_N} menu digital untuk kedai kopi, warung bakso, warung Jepang, dan dessert bar.</p>
@@ -261,6 +278,14 @@ export default function PortalMenu() {
               <li><a href={WA} target="_blank" rel="noopener noreferrer" className="inline-block py-1 transition hover:text-kertas">WhatsApp <span className="whitespace-nowrap">{WA_DISPLAY}</span></a></li>
             </ul>
           </nav>
+          <nav aria-labelledby="kaki-baca" className="text-sm">
+            <p id="kaki-baca" className="label !text-stiker">Baca juga</p>
+            <ul className="mt-3 space-y-1">
+              {BACA.map((l) => (
+                <li key={l.href}><a href={l.href} className="inline-block py-1 transition hover:text-kertas">{l.label}</a></li>
+              ))}
+            </ul>
+          </nav>
           <nav aria-labelledby="kaki-galeri" className="text-sm">
             <p id="kaki-galeri" className="label !text-stiker">Galeri lain</p>
             <ul className="mt-3 space-y-1">
@@ -272,6 +297,7 @@ export default function PortalMenu() {
         </div>
         <p className="wadah mt-10 border-t border-kertas/10 pt-4 text-xs">© 2026 PintuWeb. Semua usaha di demo ini fiktif. Berlokasi di Tulungagung.</p>
       </footer>
+      <BilahLengket waHref={WA_BILAH} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
     </div>
   );

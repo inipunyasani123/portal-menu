@@ -19,7 +19,9 @@ Kartu tenda (tent card) di atas meja: hero memuat QR sungguhan yang membuka hala
 - [Akagane Shokudō](https://menu-jepang.pintuweb.id) — nampan lacquer, teishoku, ikon alergen
 - [Lintang Manis](https://menu-dessert.pintuweb.id) — bento pastel, rakit bowl
 
-Tangkapan layar ponsel tiap demo ada di `public/images/menu/<slug>.webp` (390×844); varian WebP-nya dibuat `node scripts/static-images.mjs . --base /menu-digital`.
+Slug kartu (tautan langsung `#slug`): `kopi`, `bakso`, `jepang`, `dessert`.
+
+Tangkapan layar ponsel tiap demo (diambil ulang 30 Okt 2026 dari situs live) ada di `public/images/menu/<slug>.webp` (390×844); varian WebP-nya dibuat `node scripts/static-images.mjs . --base /menu-digital`.
 
 ## Halaman
 

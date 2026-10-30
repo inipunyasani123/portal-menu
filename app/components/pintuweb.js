@@ -22,16 +22,16 @@ export const PAKET = {
 /** Galeri yang tayang di www.pintuweb.id/<path> (lihat lib/portals.ts di PintuWeb). */
 export const GALERI = [
   { path: 'landing-page', label: 'Landing Page' },
-  { path: 'link-in-bio', label: 'Link in Bio' },
-  { path: 'kontes-desain', label: 'Kontes Desain' },
-  { path: 'undangan-digital', label: 'Undangan Digital' },
-  { path: 'website-portofolio', label: 'Website Portofolio' },
-  { path: 'website-reservasi', label: 'Website Reservasi' },
-  { path: 'website-properti', label: 'Website Properti' },
-  { path: 'aplikasi-to-do', label: 'Aplikasi To-Do' },
   { path: 'toko-online', label: 'Toko Online' },
-  { path: 'menu-digital', label: 'Menu Digital' },
   { path: 'aplikasi-mobile', label: 'Aplikasi Mobile' },
+  { path: 'menu-digital', label: 'Menu Digital' },
+  { path: 'link-in-bio', label: 'Link in Bio' },
+  { path: 'kontes-desain', label: 'Konsep Desain' },
+  { path: 'undangan-digital', label: 'Undangan Digital' },
+  { path: 'website-portofolio', label: 'Portofolio Pribadi' },
+  { path: 'website-reservasi', label: 'Reservasi & Booking' },
+  { path: 'website-properti', label: 'Properti' },
+  { path: 'aplikasi-to-do', label: 'To-Do & Produktivitas' },
 ];
 
 export const GALERI_LAIN = GALERI.filter((g) => g.path !== 'menu-digital');
@@ -41,4 +41,9 @@ export const LANJUT = [
   { href: `${PINTUWEB}/paket#landing-page`, label: 'Harga paket Landing Page' },
   { href: `${PINTUWEB}/services/landing-page`, label: 'Jasa pembuatan landing page' },
   { href: `${PINTUWEB}/demo#menu`, label: 'Semua demo PintuWeb' },
+];
+
+/** Artikel terkait di PintuWeb (grup "Baca juga"). */
+export const BACA = [
+  { href: `${PINTUWEB}/artikel/menu-digital-qr`, label: 'Menu digital QR: cara kerja dan biayanya' },
 ];

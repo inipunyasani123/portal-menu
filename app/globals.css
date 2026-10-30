@@ -88,4 +88,13 @@
   @keyframes naik { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
   .naik { animation: naik 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
   .naik-2 { animation-delay: 0.12s; }
+
+  /* Sorotan kartu demo setelah tautan #slug: cincin stiker kuning ±2 detik (tanpa kedip) */
+  [data-demo] { border-radius: 1.5rem; transition: box-shadow 0.4s; }
+  [data-demo][data-sorot] { box-shadow: 0 0 0 4px var(--color-stiker), 0 0 0 7px var(--color-tinta); }
+
+  /* Strip demo geser horizontal di hero ponsel */
+  .strip { display: flex; gap: 0.75rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0.25rem 1rem 0.75rem; margin-inline: -1rem; scroll-padding-inline: 1rem; scrollbar-width: none; }
+  .strip::-webkit-scrollbar { display: none; }
+  .strip > a { scroll-snap-align: start; flex: 0 0 auto; }
 }
